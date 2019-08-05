@@ -1,0 +1,3 @@
+- name: Deploy Prometheus
+  shell:  helm install --name prometheus-release stable/prometheus  --values values.yml  --namespace "monitoring"
+  tags: [prometheus]

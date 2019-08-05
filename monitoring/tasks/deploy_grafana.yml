@@ -1,0 +1,3 @@
+- name: Deploy Grafana
+  shell:  helm install --name grafana-release stable/grafana --values values2.yml  --namespace "monitoring"
+  tags: [grafana]

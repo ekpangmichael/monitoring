@@ -1,0 +1,47 @@
+---
+# tasks file for monitoring
+# - name: create folder
+#   include_role:
+#     name: cluster
+#     tasks_from: create_folder.yml
+
+# - include_tasks: copy_deployment_files.yml
+# - include_tasks: copy_service_account_files.yml
+
+- name: Authenticatiing
+  shell: gcloud container clusters get-credentials activo-qa-cluster --zone europe-west1-b --project andela-learning
+
+
+- include_tasks: deploy_prometheus.yml
+  tags: [prometheus]
+- include_tasks: deploy_grafana.yml
+  tags: [grafana]
+# - name: Create a k8s namespace
+# #   k8s:
+# #     name: monitoring
+# #     api_version: v1
+# #     kind: Namespace
+# #     state: present
+
+# - name: Create a namespace
+#   shell: kubectl create namespace monitoring
+
+# - name: Create cluster role binding
+#   shell: kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)
+# - name: Create service account
+#   shell:  kubectl apply -f "deployment/service-accounts.yaml" --namespace "monitoring"
+
+# - name: Run deployment
+#   shell:  kubectl apply -f ./deployment --namespace "monitoring"
+# - name: Deploy Prometheus
+#   shell:  helm install --name prometheus-release stable/prometheus  --values values.yml  --namespace "monitoring"
+#   tags: [prometheus]
+# - name: Deploy Grafana
+#   shell:  helm install --name grafana-release stable/grafana --values values2.yml  --namespace "monitoring"
+#   tags: [grafana]
+
+
+
+
+
+
